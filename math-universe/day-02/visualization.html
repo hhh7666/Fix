@@ -1,0 +1,207 @@
+<html style="margin:0;padding:0;">
+<div style="background:#0b1026;color:#e8ecf5;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;box-sizing:border-box;padding:20px 16px 40px;width:100%;">
+
+  <div style="border-bottom:1px solid #2a3558;padding-bottom:14px;margin-bottom:18px;">
+    <div style="font-size:13px;letter-spacing:2px;color:#7fd1ff;">MATH UNIVERSE · DAY 2 · ALGEBRA SPRINT</div>
+    <div style="font-size:24px;font-weight:700;margin:4px 0 6px;">代数结构冲刺①：x + 1 (mod 7) 的循环宇宙</div>
+    <div style="font-size:14px;color:#9aa7c7;">2026-09-10 ｜ 加法群 Z → 模 7 折叠 → Z₇ 循环群 → Fermat/GF(7) ｜ 代数结构 27% ｜ 总进度 ≈12%</div>
+  </div>
+
+  <div style="background:#131a38;border:1px solid #263156;border-radius:12px;padding:16px;margin-bottom:18px;">
+    <div style="font-size:15px;font-weight:600;margin-bottom:10px;">📊 进度条（10 大领域 · 今日更新）</div>
+    <div id="progress" style="display:flex;flex-direction:column;gap:7px;"></div>
+    <div style="font-size:13px;color:#9aa7c7;margin-top:10px;">总进度 <b style="color:#ffd166;">≈12%</b>（代数结构今日 +7%，数论 +5%）</div>
+  </div>
+
+  <div style="background:#131a38;border:1px solid #263156;border-radius:12px;padding:16px;margin-bottom:18px;">
+    <div style="font-size:15px;font-weight:600;margin-bottom:4px;">🎯 代数结构 0→95% 冲刺路径（今日=第 1 站）</div>
+    <div style="font-size:12px;color:#7fd1ff;margin-bottom:10px;">从最简单的式子推到目前最前沿</div>
+    <div id="sprint" style="display:flex;flex-direction:column;gap:6px;"></div>
+  </div>
+
+  <div style="background:#131a38;border:1px solid #263156;border-radius:12px;padding:16px;margin-bottom:18px;">
+    <div style="font-size:15px;font-weight:600;margin-bottom:4px;">🌌 今日星球：循环宇宙的生命周期（点击节点查看详情）</div>
+    <div style="font-size:12px;color:#7fd1ff;margin-bottom:12px;">诞生 → 折叠 → 繁荣 → 扩展 → 毁灭</div>
+    <div id="timeline" style="display:flex;flex-direction:column;gap:0;"></div>
+  </div>
+
+  <div style="background:#131a38;border:1px solid #263156;border-radius:12px;padding:16px;margin-bottom:18px;">
+    <div id="detail"></div>
+  </div>
+
+  <div style="background:#131a38;border:1px solid #263156;border-radius:12px;padding:16px;margin-bottom:18px;">
+    <div style="font-size:15px;font-weight:600;margin-bottom:4px;">🧮 确定性轨迹（Wolfram 当日限流，SVG 等价绘制，可在 JS 中复算）</div>
+    <div style="font-size:12px;color:#ffb86b;margin-bottom:12px;">注：Wolfram 服务恢复后补原图；下方所有数据可由 Table[Mod[i+j,7]] 等复算验证</div>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div>
+        <div style="font-size:13px;color:#7fd1ff;margin-bottom:6px;">① Z₇ 凯莱表（加法模 7）—— 每行每列都是 0..6 的排列（拉丁方）</div>
+        <div id="cayley" style="display:flex;justify-content:flex-start;"></div>
+      </div>
+      <div>
+        <div style="font-size:13px;color:#7fd1ff;margin-bottom:6px;">② Z₇ 循环图 —— 1 是生成元，走 7 步回到 0</div>
+        <svg id="cycle" viewBox="0 0 420 260" style="width:100%;max-width:420px;border-radius:8px;border:1px solid #2a3558;background:#0d1330;display:block;"></svg>
+      </div>
+      <div>
+        <div style="font-size:13px;color:#7fd1ff;margin-bottom:6px;">③ Fermat 小定理验证 —— a⁷ mod 7 ≡ a（JS 实时计算）</div>
+        <div id="fermat" style="font-size:14px;background:#0d1330;border:1px solid #2a3558;border-radius:8px;padding:12px;font-family:ui-monospace,monospace;line-height:1.7;"></div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:#9aa7c7;margin-top:12px;">完整数据：github.com/hhh7666/Fix → math-universe/day-02/experiment.json</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  try {
+    var FIELDS = [
+      {name:'算术与数系', pct:25},
+      {name:'代数结构（群/线性空间/环/域）', pct:27, hot:true},
+      {name:'几何（直线→平面→抛物面→球）', pct:20},
+      {name:'分析（微积分/曲率/泰勒）', pct:15},
+      {name:'微分方程与动力系统', pct:15},
+      {name:'数学物理（对称/守恒/量子结构）', pct:10},
+      {name:'拓扑（边缘：连通/闭曲面）', pct:3},
+      {name:'数论（模运算/素数/Fermat）', pct:5, hot:true},
+      {name:'概率与统计', pct:0},
+      {name:'组合与图论', pct:0}
+    ];
+    var prog = document.getElementById('progress');
+    if(prog){
+      var html = '';
+      for(var i=0;i<FIELDS.length;i++){
+        var f=FIELDS[i];
+        html += '<div style="display:flex;align-items:center;gap:8px;font-size:13px;">'+
+          '<span style="width:170px;flex:none;color:'+(f.pct>0?'#e8ecf5':'#6b7698')+';'+(f.hot?'font-weight:700;':'')+'">'+f.name+(f.hot?' ⬆':'')+'</span>'+
+          '<span style="flex:1;height:10px;background:#222c4f;border-radius:5px;overflow:hidden;display:inline-block;">'+
+            '<span style="display:block;height:100%;width:'+f.pct+'%;background:linear-gradient(90deg,#2ee6a8,#ffd166);border-radius:5px;"></span>'+
+          '</span>'+
+          '<span style="width:34px;flex:none;text-align:right;color:'+(f.pct>0?'#ffd166':'#6b7698')+'">'+f.pct+'%</span>'+
+        '</div>';
+      }
+      prog.innerHTML = html;
+    }
+
+    var SPRINT = [
+      {t:'1 加法群 Z（今日 ✅）', c:'#2ee6a8', note:'x+1 平移生成元 → 循环群直觉'},
+      {t:'2 模运算/循环群 Zₙ（今日 ✅）', c:'#2ee6a8', note:'mod 折叠 → 有限离散世界'},
+      {t:'3 有限域 GF(p)/Fermat（今日种子 ✅）', c:'#ffd166', note:'模素数=域=RSA 根基'},
+      {t:'4 复数域 C/代数闭域', c:'#5a6ba8', note:'x²+1=0 → 代数基本定理'},
+      {t:'5 单位根/分圆域/Galois', c:'#5a6ba8', note:'xⁿ=1 → 为什么五次方程无根式解'},
+      {t:'6 矩阵/非交换环/Lie 群', c:'#5a6ba8', note:'乘法不交换 → 量子力学结构'},
+      {t:'7 多项式环/理想/代数几何', c:'#5a6ba8', note:'零点集 ↔ 理想（Hilbert）'},
+      {t:'8 表示论/有限单群分类', c:'#5a6ba8', note:'群→矩阵作用；2000+页分类定理'},
+      {t:'9 范畴论/同调代数（95% 目标）', c:'#5a6ba8', note:'函子/自然变换 → 现代前沿'}
+    ];
+    var sp = document.getElementById('sprint');
+    if(sp){
+      var sh='';
+      for(var s2=0;s2<SPRINT.length;s2++){
+        var st=SPRINT[s2];
+        sh += '<div style="display:flex;align-items:center;gap:8px;font-size:13px;padding:4px 2px;border-bottom:1px dashed #222c4f;">'+
+          '<span style="width:12px;height:12px;border-radius:50%;background:'+st.c+';flex:none;"></span>'+
+          '<span style="flex:1;color:'+(s2<3?'#e8ecf5':'#6b7698')+'">'+st.t+'</span>'+
+          '<span style="font-size:11px;color:#9aa7c7;flex:1;text-align:right;">'+st.note+'</span>'+
+        '</div>';
+      }
+      sp.innerHTML = sh;
+    }
+
+    var STAGES = [
+      {t:'0 · 诞生：x 元素 + 加法群 Z', c:'#7fd1ff', geom:'数轴 = 加法群的可视化：每个整数都是 0 平移 n 次。', phys:'加法=平移=时间。0 是单位元，-n 是逆元。', matter:'无结构可驻留——无限均匀。', time:'无限线性时间。', info:'信息沿数轴单向传播。', life:'太均匀，无法诞生生命。', fields:'群论(群公理/单位元/逆元)、集合论。', not:'环(需乘法)、域(需除法)——只有一个运算 +。', insight:'顿悟 #1：群=对称性的代数化。平移对称的形式化，正是昨天能量守恒的代数骨架。'},
+      {t:'1 · 折叠：mod 7 时钟宇宙', c:'#2ee6a8', geom:'无限直线卷成环：7 个元素 0..6，7 步回到原点（星期的数学来源）。', phys:'时间循环；有限宇宙信息有上限(7 个位置)。', matter:'离散格点诞生。', time:'周期时间：7 步一循环。', info:'只能绕环传播。', life:'有限性给出信息差的可能性——但还不够。', fields:'模运算、同余类、初等数论种子。', not:'域(还没有乘法)、环。', insight:'顿悟 #2：有限性→离散结构→数论诞生。昨天说连续世界无整数之家，今天模运算给了整数一个 7 座位的家。'},
+      {t:'2 · 繁荣：Z₇ 循环群（拉丁方/原子）', c:'#ffd166', geom:'凯莱表：每行每列都是 0..6 的排列（拉丁方）——加法不撞车。', phys:'拉丁方=守恒律的代数版；1 是生成元，阶=7。', matter:'素数阶→无真子群→原子结构（Lagrange：子群阶整除 7）。', time:'7 步一周期，精确可预测。', info:'无冗余、无差错、无创新。', life:'精确但贫瘠——像晶体，不像生命。', fields:'循环群/生成元/阶/凯莱表/拉丁方/子群/Lagrange 定理。', not:'环、域、Galois。', insight:'顿悟 #3：素数阶群=原子(无内部零件)；复合阶=分子(有器官)。结构复杂度来自可分解性。'},
+      {t:'3 · 扩展：Fermat / GF(7) 域种子', c:'#ff9f43', geom:'a⁷ mod 7 ≡ a：幂运算绕一圈回到自己。', phys:'模素数的运算同时有 +·÷ → 域 GF(7)。', matter:'域=能解线性方程的世界（除法总可行）。', time:'幂的循环周期 6（除 0 外）——非平凡循环。', info:'加密的种子：大素数上取幂易、求逆难。', life:'域是"算术完备"的——但一个域仍太对称。', fields:'Fermat 小定理、有限域 GF(p)、初等密码学思想。', not:'Galois(需多项式扩张)、表示论(需矩阵)。', insight:'顿悟 #4：只有 7 个数字的世界藏着 RSA 的全部秘密。前沿不是离基础远，而是基础被用到极致。'},
+      {t:'4 · 毁灭：纯循环凝固', c:'#ff6b81', geom:'几何完美，文明凝固。', phys:'无子群=无内部结构分化；7 步一循环=历史永远重复。', matter:'晶体般精确，永不出新。', time:'永恒循环：一亿轮后与第一轮相同。', info:'无演化、无记忆沉淀。', life:'文明精确但贫瘠——"繁荣"即"凝固"。', fields:'群的结构理论(子群/阶)、循环群的分类。', not:'非线性动力学、概率——这里没有随机与涌现。', insight:'最终顿悟：生命需要内部结构分化。最小活化：① 复合阶 Z₁₂(子群分层) ② 加第二生成元 → Z₇×Z₇/GF(49)。留给明天。'}
+    ];
+    var DETAILS = [];
+    for(var k=0;k<STAGES.length;k++){
+      var s=STAGES[k];
+      DETAILS.push(
+        '<div style="font-size:13px;color:#7fd1ff;font-weight:600;margin-bottom:8px;">几何表面与空间结构</div><div style="font-size:14px;color:#e8ecf5;margin-bottom:12px;">'+s.geom+'</div>'+
+        '<div style="font-size:13px;color:#2ee6a8;font-weight:600;margin-bottom:8px;">运动与物理规则</div><div style="font-size:14px;color:#e8ecf5;margin-bottom:12px;">'+s.phys+'</div>'+
+        '<div style="font-size:13px;color:#ffd166;font-weight:600;margin-bottom:8px;">物质 / 稳定结构</div><div style="font-size:14px;color:#e8ecf5;margin-bottom:12px;">'+s.matter+'</div>'+
+        '<div style="font-size:13px;color:#ff6b81;font-weight:600;margin-bottom:8px;">时间与因果 / 信息传播</div><div style="font-size:14px;color:#e8ecf5;margin-bottom:12px;">'+s.time+' ｜ '+s.info+'</div>'+
+        '<div style="font-size:13px;color:#c792ea;font-weight:600;margin-bottom:8px;">生态层级与智慧体</div><div style="font-size:14px;color:#e8ecf5;margin-bottom:12px;">'+s.life+'</div>'+
+        '<div style="font-size:13px;color:#7fd1ff;font-weight:600;margin-bottom:8px;">涉及 / 不涉及的数学领域</div><div style="font-size:14px;color:#e8ecf5;margin-bottom:6px;">✅ '+s.fields+'</div><div style="font-size:14px;color:#ffb86b;margin-bottom:12px;">🚫 '+s.not+'</div>'+
+        '<div style="font-size:13px;color:#ffd166;font-weight:600;margin-bottom:4px;">💡 顿悟</div><div style="font-size:14px;color:#e8ecf5;">'+s.insight+'</div>'
+      );
+    }
+
+    var tl = document.getElementById('timeline');
+    var detail = document.getElementById('detail');
+    if(tl){
+      var th='';
+      for(var j=0;j<STAGES.length;j++){
+        th += '<button data-i="'+j+'" style="display:flex;align-items:center;gap:10px;text-align:left;width:100%;background:transparent;border:none;border-left:3px solid '+(j===0?STAGES[j].c:'#2a3558')+';padding:11px 10px;cursor:pointer;color:#e8ecf5;min-height:44px;box-sizing:border-box;">'+
+          '<span style="width:12px;height:12px;border-radius:50%;background:'+STAGES[j].c+';flex:none;"></span>'+
+          '<span style="font-size:14px;font-weight:600;flex:1;">'+STAGES[j].t+'</span>'+
+          '<span style="font-size:11px;color:#9aa7c7;">点按展开 ▾</span>'+
+        '</button>';
+      }
+      tl.innerHTML = th;
+      var btns = tl.querySelectorAll('button');
+      for(var b=0;b<btns.length;b++){
+        btns[b].addEventListener('click',(function(idx){
+          return function(){
+            for(var m=0;m<btns.length;m++){
+              btns[m].style.borderLeftColor = (m===idx ? STAGES[m].c : '#2a3558');
+            }
+            if(detail) detail.innerHTML = DETAILS[idx];
+          };
+        })(b));
+      }
+    }
+    if(detail) detail.innerHTML = DETAILS[0];
+
+    var cay = document.getElementById('cayley');
+    if(cay){
+      var colors = ['#7d3cff','#4a6cf7','#2e9ef5','#2ee6a8','#ffd166','#ff9f43','#ff6b81'];
+      var html2 = '<div style="font-size:11px;color:#9aa7c7;margin-bottom:4px;">行+列 (mod 7)</div>';
+      for(var r=0;r<7;r++){
+        var row = '<div style="display:flex;gap:3px;margin-bottom:3px;">';
+        for(var c2=0;c2<7;c2++){
+          var v=(r+c2)%7;
+          row += '<div style="width:26px;height:26px;background:'+colors[v]+';border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#0b1026;">'+v+'</div>';
+        }
+        row += '</div>';
+        html2 += row;
+      }
+      cay.innerHTML = html2;
+    }
+
+    var cyc = document.getElementById('cycle');
+    if(cyc){
+      var cx=210, cyy=120, R=85, ns='';
+      var pts=[];
+      for(var n=0;n<7;n++){
+        var a=-Math.PI/2 + n*2*Math.PI/7;
+        pts.push([cx+R*Math.cos(a), cyy+R*Math.sin(a)]);
+      }
+      for(var e=0;e<7;e++){
+        var p1=pts[e], p2=pts[(e+1)%7];
+        var mx=(p1[0]+p2[0])/2, my=(p1[1]+p2[1])/2;
+        ns += '<line x1="'+p1[0]+'" y1="'+p1[1]+'" x2="'+p2[0]+'" y2="'+p2[1]+'" stroke="#ff9f43" stroke-width="2"/>';
+        var dx=p2[0]-p1[0], dy=p2[1]-p1[1], L=Math.sqrt(dx*dx+dy*dy)||1;
+        ns += '<polygon points="'+(mx+8*dx/L)+','+(my+8*dy/L)+' '+(mx-3*dy/L)+','+(my+3*dx/L)+' '+(mx+3*dy/L)+','+(my-3*dx/L)+'" fill="#ffd166"/>';
+      }
+      for(var q=0;q<7;q++){
+        ns += '<circle cx="'+pts[q][0]+'" cy="'+pts[q][1]+'" r="16" fill="#131a38" stroke="#7fd1ff" stroke-width="1.5"/>';
+        ns += '<text x="'+pts[q][0]+'" y="'+(pts[q][1]+4)+'" text-anchor="middle" fill="#e8ecf5" font-size="12">'+q+'</text>';
+      }
+      cyc.innerHTML = ns;
+    }
+
+    var fer = document.getElementById('fermat');
+    if(fer){
+      var out='<b style="color:#7fd1ff;">Table[Mod[a^7,7], {a,0,6}] = </b>{';
+      var vals=[];
+      for(var a=0;a<7;a++){
+        vals.push((Math.pow(a,7))%7);
+      }
+      out += vals.join(', ') + '}<br/><span style="color:#9aa7c7;">验证：a⁷ mod 7 ≡ a —— 幂运算回到原点（Fermat 小定理，p=7 素数）</span>';
+      fer.innerHTML = out;
+    }
+  } catch(e) {}
+})();
+</script>
+</html>
