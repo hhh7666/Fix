@@ -15,7 +15,8 @@
     {"stage": "x (数轴) & x+y (平面)", "url": "https://aka.doubaocdn.com/s/pXafiTBl8P", "note": "线性世界：直线与平面"},
     {"stage": "x^2+y (抛物柱面)", "url": "https://aka.doubaocdn.com/s/qaCZGVPZDl", "note": "曲率诞生：一半束缚一半自由"},
     {"stage": "x^2+y^2 (旋转抛物面+等高线)", "url": "https://aka.doubaocdn.com/s/Bgp6VSVnBR", "note": "旋转对称：势阱与圆对称"},
-    {"stage": "x^2+y^2+z^2 (等能面球) + 谐振子轨道", "url": null, "note": "Wolfram 暂不可用，由 SVG 示意补充"}
+    {"stage": "x^2+y^2+z^2 (等能面=球面)", "url": "https://aka.doubaocdn.com/s/RzfVN7r06K", "note": "单位球面：三维球对称势的等能面"},
+    {"stage": "谐振子轨道 (利萨如图)", "url": "https://aka.doubaocdn.com/s/jUnELjqsLy", "note": "二维谐振子的椭圆轨道"}
   ],
   "fields_touched": ["算术与数系", "代数结构(群/线性空间)", "几何", "分析(微积分)", "微分方程与动力系统", "数学物理"],
   "fields_not_touched": ["概率与统计", "数论", "组合与图论", "拓扑(深层不变量)"],
