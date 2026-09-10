@@ -39,20 +39,12 @@
         <img src="https://aka.doubaocdn.com/s/Bgp6VSVnBR" alt="x^2+y^2 旋转抛物面与等高线" style="width:100%;max-width:560px;border-radius:8px;border:1px solid #2a3558;display:block;"/>
       </div>
       <div>
-        <div style="font-size:13px;color:#ffb86b;margin-bottom:6px;">④ x²+y²+z²（等能面=球面）与谐振子椭圆轨道 —— SVG 示意（Wolfram 服务暂不可用，次日补齐）</div>
-        <svg viewBox="0 0 560 240" style="width:100%;max-width:560px;border-radius:8px;border:1px solid #2a3558;background:#0d1330;display:block;" aria-label="等能面球与椭圆轨道示意">
-          <ellipse cx="160" cy="120" rx="110" ry="110" fill="none" stroke="#ff9f43" stroke-width="2" opacity="0.9"/>
-          <ellipse cx="160" cy="120" rx="110" ry="45" fill="none" stroke="#ff9f43" stroke-width="1.5" opacity="0.55"/>
-          <ellipse cx="160" cy="120" rx="110" ry="78" fill="none" stroke="#ff9f43" stroke-width="1.2" opacity="0.4"/>
-          <ellipse cx="160" cy="120" rx="78" ry="110" fill="none" stroke="#ff9f43" stroke-width="1.2" opacity="0.4"/>
-          <line x1="50" y1="120" x2="270" y2="120" stroke="#5a6ba8" stroke-width="1"/>
-          <line x1="160" y1="10" x2="160" y2="230" stroke="#5a6ba8" stroke-width="1"/>
-          <text x="278" y="124" fill="#8fa0cc" font-size="13">x²+y²+z²=1 等能面（球面）</text>
-          <ellipse cx="420" cy="120" rx="120" ry="52" fill="none" stroke="#c792ea" stroke-width="3"/>
-          <circle cx="480" cy="96" r="6" fill="#ffd166"/>
-          <text x="360" y="210" fill="#8fa0cc" font-size="13">谐振子轨道：椭圆（利萨如特例）</text>
-          <text x="545" y="90" fill="#ffd166" font-size="13">●</text>
-        </svg>
+        <div style="font-size:13px;color:#7fd1ff;margin-bottom:6px;">④ x²+y²+z²（等能面=球面）——三维球对称势，原子结构同源</div>
+        <img src="https://aka.doubaocdn.com/s/RzfVN7r06K" alt="x^2+y^2+z^2 等能面球面" style="width:100%;max-width:560px;border-radius:8px;border:1px solid #2a3558;display:block;"/>
+      </div>
+      <div>
+        <div style="font-size:13px;color:#7fd1ff;margin-bottom:6px;">⑤ 谐振子椭圆轨道 —— 势阱中的周期运动（利萨如特例）</div>
+        <img src="https://aka.doubaocdn.com/s/jUnELjqsLy" alt="谐振子椭圆轨道" style="width:100%;max-width:560px;border-radius:8px;border:1px solid #2a3558;display:block;"/>
       </div>
     </div>
     <div style="font-size:12px;color:#9aa7c7;margin-top:12px;">完整数据：github.com/hhh7666/Fix → math-universe/day-01/experiment.json</div>
@@ -81,23 +73,23 @@
         var f=FIELDS[i];
         var c = f.pct>0 ? '#2ee6a8' : '#3a4670';
         html += '<div style="display:flex;align-items:center;gap:8px;font-size:13px;">'+
-          '<span style="width:150px;flex:none;color:'+(f.pct>0?'#e8ecf5':'#6b7698')+';">'+f.name+'</span>'+
+          '<span style="width:150px;flex:none;color:'+(f.pct>0?'#e8ecf5':'#6b7698')+'">'+f.name+'</span>'+
           '<span style="flex:1;height:10px;background:#222c4f;border-radius:5px;overflow:hidden;display:inline-block;">'+
             '<span style="display:block;height:100%;width:'+f.pct+'%;background:linear-gradient(90deg,#2ee6a8,#ffd166);border-radius:5px;"></span>'+
           '</span>'+
-          '<span style="width:34px;flex:none;text-align:right;color:'+(f.pct>0?'#ffd166':'#6b7698')+';">'+f.pct+'%</span>'+
+          '<span style="width:34px;flex:none;text-align:right;color:'+(f.pct>0?'#ffd166':'#6b7698')+'">'+f.pct+'%</span>'+
         '</div>';
       }
       prog.innerHTML = html;
     }
 
     var STAGES = [
-      {t:'0 · 诞生：x（一条线）', c:'#7fd1ff', geom:'一维数轴。没有环绕、没有闭合回路。', phys:'万物只能沿直线前进/后退，无法互相绕过。', matter:'无——没有任何结构可以在线上"逗留"。', time:'单向滑行，无周期。', info:'只能前后传播，无岔路。', life:'无法诞生生命：太线性。', fields:'算术与数系、实数序结构。', not:'几何（无曲率）、拓扑、概率——一个点的世界没有形状可言。', insight:'顿悟 #1：世界的复杂度来自自由度的数量。1 个自由度=一条线=没有"世界"。'},
-      {t:'1 · 发展：x+y（平面）', c:'#2ee6a8', geom:'二维平面。可绕路、可画圈。', phys:'加法=平移 → 线性空间。平移对称 → 能量守恒直觉（Noether 定理的雏形，自己摸到的）。', matter:'平面可容纳图案，但太均匀——无信息差。', time:'时间均匀流逝，无"此刻"。', info:'沿直线传播，可绕路。', life:'无法诞生生命：太对称、没有演化动力。', fields:'线性代数、解析几何、群论（加法群）、平移对称性。', not:'微分几何（无曲率）、数论——平面光滑连续，没有整数容身之处。', insight:'顿悟 #2：对称性 → 守恒律。从"纽约和上海物理定律一样"推出宇宙第一条规则。'},
-      {t:'2 · 弯曲：x²+y（抛物柱面）', c:'#ffd166', geom:'无限长的山谷：沿 y 平坦、沿 x 弯曲。', phys:'曲率第一次出现 → 弯曲=引力（广义相对论种子）。谷底=势的概念。', matter:'一半自由方向（y 可无限滑动）+ 一半束缚方向（x 滚回谷底）。', time:'沿 y 无时间感；沿 x 有"回落"方向感。', info:'沿山谷传播，有了"低谷"这个特殊位置。', life:'仍太简单：有势但无周期结构。', fields:'微积分（导数/切线）、二次曲线、抛物面、曲率概念。', not:'拓扑、概率、数论。', insight:'顿悟 #3：平方=弯曲=势=引力。二次项是最小的"非平凡"改动。'},
+      {t:'0 · 诞生：x（一条线）', c:'#7fd1ff', geom:'一维数轴。没有环绕、没有闭合回路。', phys:'万物只能沿直线前进/后退，无法互相绕过。', matter:'无——没有任何结构可以在线上“逗留”。', time:'单向滑行，无周期。', info:'只能前后传播，无岔路。', life:'无法诞生生命：太线性。', fields:'算术与数系、实数序结构。', not:'几何（无曲率）、拓扑、概率——一个点的世界没有形状可言。', insight:'顿悟 #1：世界的复杂度来自自由度的数量。1 个自由度=一条线=没有“世界”。'},
+      {t:'1 · 发展：x+y（平面）', c:'#2ee6a8', geom:'二维平面。可绕路、可画圈。', phys:'加法=平移 → 线性空间。平移对称 → 能量守恒直觉（Noether 定理的雏形，自己摸到的）。', matter:'平面可容纳图案，但太均匀——无信息差。', time:'时间均匀流逝，无“此刻”。', info:'沿直线传播，可绕路。', life:'无法诞生生命：太对称、没有演化动力。', fields:'线性代数、解析几何、群论（加法群）、平移对称性。', not:'微分几何（无曲率）、数论——平面光滑连续，没有整数容身之处。', insight:'顿悟 #2：对称性 → 守恒律。从“纽约和上海物理定律一样”推出宇宙第一条规则。'},
+      {t:'2 · 弯曲：x²+y（抛物柱面）', c:'#ffd166', geom:'无限长的山谷：沿 y 平坦、沿 x 弯曲。', phys:'曲率第一次出现 → 弯曲=引力（广义相对论种子）。谷底=势的概念。', matter:'一半自由方向（y 可无限滑动）+ 一半束缚方向（x 滚回谷底）。', time:'沿 y 无时间感；沿 x 有“回落”方向感。', info:'沿山谷传播，有了“低谷”这个特殊位置。', life:'仍太简单：有势但无周期结构。', fields:'微积分（导数/切线）、二次曲线、抛物面、曲率概念。', not:'拓扑、概率、数论。', insight:'顿悟 #3：平方=弯曲=势=引力。二次项是最小的“非平凡”改动。'},
       {t:'3 · 繁荣：x²+y²（旋转抛物面）', c:'#ff9f43', geom:'完美的碗。绕 z 轴任意旋转不变 → 连续对称。', phys:'旋转对称 → 角动量守恒。势阱中质点做椭圆轨道（谐振子）。', matter:'稳定结构诞生：束缚态、周期运动、位置+能量两个可观测量——物质成为可能。', time:'周期时间：万物循环往复。', info:'振动模式传播（谐振子模式=光/声的雏形）。', life:'可以形成稳定结构，但仍不可逆缺失。', fields:'旋转群 SO(2)、极坐标、Noether 定理、谐振子、傅里叶思想萌芽、数学物理。', not:'概率（无随机）、数论、组合。', insight:'顿悟 #4：任何势能最低点附近的世界都长成这个碗（泰勒展开二次项主导）→ 谐振子=宇宙默认结构=量子力学起点。'},
       {t:'4 · 原子：x²+y²+z²（等能面=球面）', c:'#ff6b81', geom:'三维球对称势。等能面是球面。', phys:'球对称 → 分离变量 → 角量子数 → 元素周期表雏形（与氢原子同源）。', matter:'原子、化学、生命化学的基础——三维谐振子=原子。', time:'量子化的能量层级出现（结构上）。', info:'模式可叠加（傅里叶思想）。', life:'智慧体可能诞生：感知=碗底的振动模式；数学观=世界是线性叠加的；记忆=可逆动力学下无法沉淀（除非引入耗散）。', fields:'三维谐振子、SO(3)、分离变量、中心势、量子力学结构。', not:'组合、图论、数论、概率（经典层面）。', insight:'顿悟 #5：加一个维度，碗就变成了原子。化学与生命的舞台就此搭好。'},
-      {t:'5 · 毁灭：可逆宇宙的热寂', c:'#ffb86b', geom:'几何依旧完美，但世界停止演化。', phys:'动力学完全可逆 → 无熵增 → 无时间箭头 → 过去与未来对称。', matter:'结构永存，但永不变化。', time:'时间循环：一亿个周期后和第一周期完全一样。', info:'信息永不丢失也永不增长——"历史"概念不存在。', life:'即使智慧体诞生，也永远重复同一周期：没有进步、没有遗忘。', fields:'热力学第二定律的反面、可逆动力学、时间之箭。', not:'概率（若加入随机即打破可逆）、非线性动力学。', insight:'最终顿悟：生命需要不可逆。最小改动=加高次项（x⁴ 或耦合项 xy）打破简谐 → 非线性与耗散。这留给 Day 2 之后的式子。'}
+      {t:'5 · 毁灭：可逆宇宙的热寂', c:'#ffb86b', geom:'几何依旧完美，但世界停止演化。', phys:'动力学完全可逆 → 无熵增 → 无时间箭头 → 过去与未来对称。', matter:'结构永存，但永不变化。', time:'时间循环：一亿个周期后和第一周期完全一样。', info:'信息永不丢失也永不增长——“历史”概念不存在。', life:'即使智慧体诞生，也永远重复同一周期：没有进步、没有遗忘。', fields:'热力学第二定律的反面、可逆动力学、时间之箭。', not:'概率（若加入随机即打破可逆）、非线性动力学。', insight:'最终顿悟：生命需要不可逆。最小改动=加高次项（x⁴ 或耦合项 xy）打破简谐 → 非线性与耗散。这留给 Day 2 之后的式子。'}
     ];
     var DETAILS = [];
     for(var k=0;k<STAGES.length;k++){
