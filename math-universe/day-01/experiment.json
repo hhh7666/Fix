@@ -1,0 +1,37 @@
+{
+  "project": "math-universe",
+  "day": 1,
+  "date": "2026-09-10",
+  "seed_expression": "x",
+  "expansion_chain": ["x", "x+y", "x^2+y", "x^2+y^2", "x^2+y^2+z^2"],
+  "lifecycle": {
+    "birth": "x —— 一个数、一个点、一条数轴",
+    "development": ["x+y —— 平面：平移对称性与线性空间", "x^2+y —— 抛物柱面：曲率首次诞生"],
+    "prosperity": "x^2+y^2 —— 旋转抛物面：旋转对称 -> 谐振子 -> 稳定结构与周期运动",
+    "expansion": "x^2+y^2+z^2 —— 三维球对称势：与原子结构同源",
+    "death": "可逆宇宙：无熵增、无时间箭头、永恒循环 -> 热力学静止"
+  },
+  "wolfram_visuals": [
+    {"stage": "x (数轴) & x+y (平面)", "url": "https://aka.doubaocdn.com/s/pXafiTBl8P", "note": "线性世界：直线与平面"},
+    {"stage": "x^2+y (抛物柱面)", "url": "https://aka.doubaocdn.com/s/qaCZGVPZDl", "note": "曲率诞生：一半束缚一半自由"},
+    {"stage": "x^2+y^2 (旋转抛物面+等高线)", "url": "https://aka.doubaocdn.com/s/Bgp6VSVnBR", "note": "旋转对称：势阱与圆对称"},
+    {"stage": "x^2+y^2+z^2 (等能面球) + 谐振子轨道", "url": null, "note": "Wolfram 暂不可用，由 SVG 示意补充"}
+  ],
+  "fields_touched": ["算术与数系", "代数结构(群/线性空间)", "几何", "分析(微积分)", "微分方程与动力系统", "数学物理"],
+  "fields_not_touched": ["概率与统计", "数论", "组合与图论", "拓扑(深层不变量)"],
+  "not_touched_reasons": {
+    "概率与统计": "宇宙完全确定且可逆，无随机立足点",
+    "数论": "x 是连续变量，无离散整数结构",
+    "组合与图论": "连续无界空间无有限选择与离散网络",
+    "拓扑(深层)": "点/平面/抛物面/球的拓扑过于简单(可收缩或简单连通)"
+  },
+  "insights": [
+    "加法 x+y = 空间平移 = 线性空间(向量空间)的几何本质",
+    "曲率 x^2 项 = 引力直觉的种子(广义相对论萌芽)",
+    "旋转对称 x^2+y^2 -> 角动量守恒(Noether 定理：对称性生成守恒律)",
+    "任何势能最低点附近的世界都长成谐振子(泰勒展开二次项) -> 谐振子 = 量子力学的起点",
+    "可逆动力学 = 无熵增 = 无历史 = 文明永恒循环(热力学静止的毁灭)"
+  ],
+  "progress_after_day1": 0.11,
+  "github_repo": "hhh7666/Fix"
+}
